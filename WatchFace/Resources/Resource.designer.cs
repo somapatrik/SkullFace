@@ -1080,61 +1080,58 @@ namespace WatchFace
 			public const int ic_more_vert_24dp_wht = 2131230762;
 			
 			// aapt resource value: 0x7F08002C
-			public const int notification_action_background = 2131230764;
+			public const int logo = 2131230764;
 			
 			// aapt resource value: 0x7F08002D
-			public const int notification_bg = 2131230765;
+			public const int notification_action_background = 2131230765;
 			
 			// aapt resource value: 0x7F08002E
-			public const int notification_bg_low = 2131230766;
+			public const int notification_bg = 2131230766;
 			
 			// aapt resource value: 0x7F08002F
-			public const int notification_bg_low_normal = 2131230767;
+			public const int notification_bg_low = 2131230767;
 			
 			// aapt resource value: 0x7F080030
-			public const int notification_bg_low_pressed = 2131230768;
+			public const int notification_bg_low_normal = 2131230768;
 			
 			// aapt resource value: 0x7F080031
-			public const int notification_bg_normal = 2131230769;
+			public const int notification_bg_low_pressed = 2131230769;
 			
 			// aapt resource value: 0x7F080032
-			public const int notification_bg_normal_pressed = 2131230770;
+			public const int notification_bg_normal = 2131230770;
 			
 			// aapt resource value: 0x7F080033
-			public const int notification_icon_background = 2131230771;
+			public const int notification_bg_normal_pressed = 2131230771;
 			
 			// aapt resource value: 0x7F080034
-			public const int notification_template_icon_bg = 2131230772;
+			public const int notification_icon_background = 2131230772;
 			
 			// aapt resource value: 0x7F080035
-			public const int notification_template_icon_low_bg = 2131230773;
+			public const int notification_template_icon_bg = 2131230773;
 			
 			// aapt resource value: 0x7F080036
-			public const int notification_tile_bg = 2131230774;
+			public const int notification_template_icon_low_bg = 2131230774;
 			
 			// aapt resource value: 0x7F080037
-			public const int notify_panel_notification_icon_bg = 2131230775;
+			public const int notification_tile_bg = 2131230775;
 			
 			// aapt resource value: 0x7F080038
-			public const int open_on_phone = 2131230776;
+			public const int notify_panel_notification_icon_bg = 2131230776;
 			
 			// aapt resource value: 0x7F080039
-			public const int open_on_phone_animation = 2131230777;
+			public const int open_on_phone = 2131230777;
 			
 			// aapt resource value: 0x7F08003A
-			public const int pirat_background = 2131230778;
+			public const int open_on_phone_animation = 2131230778;
 			
 			// aapt resource value: 0x7F08003B
 			public const int preference_wrapped_icon = 2131230779;
 			
 			// aapt resource value: 0x7F08003C
-			public const int preview_analog = 2131230780;
+			public const int preview = 2131230780;
 			
 			// aapt resource value: 0x7F08003D
-			public const int xamarin_background = 2131230781;
-			
-			// aapt resource value: 0x7F08003E
-			public const int xamarin_logo = 2131230782;
+			public const int skull_background = 2131230781;
 			
 			static Drawable()
 			{

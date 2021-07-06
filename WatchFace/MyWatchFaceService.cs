@@ -38,9 +38,6 @@ namespace WatchFace
             CanvasWatchFaceService owner;
 
             // For painting the hands of the watch:
-            Paint hourPaint;
-            Paint minutePaint;
-            Paint secondPaint;
             Paint timePaint;
 
             // For painting the tick marks around the edge of the clock face:
@@ -48,7 +45,7 @@ namespace WatchFace
 
             // The current time:
             public Time time;
-            Timer timerSeconds;
+            //Timer timerSeconds;
 
             // Broadcast receiver for handling time zone changes:
             TimeZoneReceiver timeZoneReceiver;
@@ -66,8 +63,7 @@ namespace WatchFace
             {
                 this.owner = owner;
             }
-
-            // Called when the engine is created for the first time: 
+ 
             public override void OnCreate (ISurfaceHolder holder) 
             {
                 base.OnCreate(holder);
@@ -82,31 +78,23 @@ namespace WatchFace
                     .SetShowSystemUiTime (false)
                     .Build ());
 
-                // Configure the background image:
+                // Configure the background image
                 var backgroundDrawable = 
-                    Application.Context.Resources.GetDrawable (Resource.Drawable.pirat_background);
+                    Application.Context.Resources.GetDrawable (Resource.Drawable.skull_background);
                 backgroundImage = (backgroundDrawable as BitmapDrawable).Bitmap;
-
-                // Initialize paint objects for drawing the clock hands and tick marks:
-                //hourPaint = new Paint();
-                //minutePaint = new Paint();
-                //secondPaint = new Paint();
-                //tickPaint = new Paint();
 
                 // Time text
                 timePaint = new Paint();
-                timePaint.SetARGB(255, 249,43,21);
-                //timePaint.StrokeWidth = 2.0f;
+                timePaint.SetARGB(255, 0,0,0);
+                timePaint.StrokeWidth = 2.0f;
                 timePaint.AntiAlias = true;
-                timePaint.TextSize = 30;
+                timePaint.TextSize = 50;
+                timePaint.TextAlign = Paint.Align.Center;
 
                 // Instantiate the time object:
                 time = new Time();
 
-                // Start a timer for redrawing the click face (second hand)
-                // every second.
-                // How to stop the timer? It shouldn't run in ambient mode...
-
+                // Second timer example:
                 //timerSeconds = new Timer (new TimerCallback (state => {
                 //    Invalidate ();
                 //}), null, 
@@ -152,14 +140,12 @@ namespace WatchFace
                 if (Log.IsLoggable (Tag, LogPriority.Debug))
                     Log.Debug (Tag, "OnAmbientMode");
                 
-                //if (lowBitAmbient)
-                //{
-                //    bool antiAlias = !inAmbientMode;
-                //    hourPaint.AntiAlias = antiAlias;
-                //    minutePaint.AntiAlias = antiAlias;
-                //    secondPaint.AntiAlias = antiAlias;
-                //    tickPaint.AntiAlias = antiAlias;
-                //}
+                if (lowBitAmbient)
+                {
+                   bool antiAlias = !inAmbientMode;
+                    timePaint.AntiAlias = antiAlias;
+                }
+
                 Invalidate ();
             }
 
@@ -171,7 +157,7 @@ namespace WatchFace
                 time.SetToNow();
 
                 // Text with current time
-                string timetext = time.Hour.ToString() + " : " + time.Minute.ToString();
+                string timetext = time.Format("%H : %M");//  time.Hour.ToString() + " : " + time.Minute.ToString();
 
                 // Determine the bounds of the drawing surface:
                 int width = bounds.Width ();
@@ -182,61 +168,17 @@ namespace WatchFace
                     || backgroundScaledBitmap.Width != width
                     || backgroundScaledBitmap.Height != height)
                 {
-                    backgroundScaledBitmap = Bitmap.CreateScaledBitmap(backgroundImage,
-                        width, height, true /* filter */);
+                    backgroundScaledBitmap = Bitmap.CreateScaledBitmap(backgroundImage, width, height, true /* filter */);
                 }
                 canvas.DrawColor (Color.Black);
                 canvas.DrawBitmap(backgroundScaledBitmap, 0, 0, null);
 
-                // Determine the center of the drawing surface:
                 float centerX = width / 2.0f;
                 float centerY = height / 2.0f;
 
-                float lowerY = height - (centerY / 4.0f);
+                float higherY = centerY - 50;
 
-                canvas.DrawText(timetext, centerX - 20, lowerY, timePaint);
-
-                // Draw the ticks:
-               // float innerTickRadius = centerX - 10;
-               // float outerTickRadius = centerX;
-               // for (int tickIndex = 0; tickIndex < 12; tickIndex++)
-               // {
-               //     float tickRot = (float) (tickIndex * Math.PI * 2 / 12);
-               //     float innerX = (float) Math.Sin(tickRot) * innerTickRadius;
-               //     float innerY = (float) -Math.Cos(tickRot) * innerTickRadius;
-               //     float outerX = (float) Math.Sin(tickRot) * outerTickRadius;
-               //     float outerY = (float) -Math.Cos(tickRot) * outerTickRadius;
-               //    // canvas.DrawLine(centerX + innerX, centerY + innerY,
-               //    //     centerX + outerX, centerY + outerY, tickPaint);
-               // }
-
-               // // Calculate the angle of rotation and length for each hand:
-               // float secRot = time.Second / 30f * (float) Math.PI;
-               // int minutes = time.Minute;
-               // float minRot = minutes / 30f * (float) Math.PI;
-               // float hrRot = ((time.Hour + (minutes / 60f)) / 6f ) * (float) Math.PI;
-
-               // float secLength = centerX - 20;
-               // float minLength = centerX - 40;
-               // float hrLength = centerX - 80;
-
-               // // Draw the second hand only in interactive mode:
-               // if (!IsInAmbientMode)
-               // {
-               //     float secX = (float) Math.Sin(secRot) * secLength;
-               //     float secY = (float) -Math.Cos(secRot) * secLength;
-               //    // canvas.DrawLine(centerX, centerY, centerX + secX, centerY + secY, secondPaint);
-               // }
-
-               // // Draw the minute hand:
-               // float minX = (float) Math.Sin(minRot) * minLength;
-               // float minY = (float) -Math.Cos(minRot) * minLength;
-               //// canvas.DrawLine(centerX, centerY, centerX + minX, centerY + minY, minutePaint);
-
-               // // Draw the hour hand:
-               // float hrX = (float) Math.Sin(hrRot) * hrLength;
-               // float hrY = (float) -Math.Cos(hrRot) * hrLength;
-               //// canvas.DrawLine(centerX, centerY, centerX + hrX, centerY + hrY, hourPaint);
+                canvas.DrawText(timetext, centerX, higherY, timePaint);
             }
 
             // Called whenever the watch face is becoming visible or hidden. Note that
@@ -255,8 +197,8 @@ namespace WatchFace
                 if (visible)
                 {
                     RegisterTimezoneReceiver ();
-                    time.Clear (Java.Util.TimeZone.Default.ID);
-                    time.SetToNow ();
+                    time.Clear(Java.Util.TimeZone.Default.ID);
+                    time.SetToNow();
                 }
                 else
                     UnregisterTimezoneReceiver ();

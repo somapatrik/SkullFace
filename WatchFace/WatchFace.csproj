@@ -136,16 +136,15 @@
     <AndroidResource Include="Resources\values\strings.xml" />
     <AndroidResource Include="Resources\xml\watch_face.xml" />
     <AndroidResource Include="Resources\drawable-hdpi\Icon.png" />
-    <AndroidResource Include="Resources\drawable-hdpi\preview_analog.png" />
-    <AndroidResource Include="Resources\drawable-hdpi\xamarin_logo.png" />
-    <AndroidResource Include="Resources\drawable-hdpi\xamarin_background.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\preview.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\logo.png" />
     <AndroidResource Include="Resources\drawable-mdpi\Icon.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\Icon.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\Icon.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\Icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\pirat_background.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\skull_background.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
